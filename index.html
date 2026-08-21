@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#1b0d20">
+<title>For Cham Cham ❤️</title>
+<style>
+:root{
+  --ink:#3d1830; --pink:#ef4f86; --deep:#a81752; --paper:#fff9fb;
+  --cream:#fff7ea; --line:#6b4256; --muted:#7f6271;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:ui-rounded,"SF Pro Rounded","Segoe UI",Arial,sans-serif;background:#1b0d20;color:var(--ink)}
+button{font:inherit}
+#app{position:relative;width:100%;height:100%;overflow:hidden;background:
+ radial-gradient(circle at 15% 10%,rgba(255,123,175,.18),transparent 30%),
+ radial-gradient(circle at 85% 90%,rgba(135,98,255,.15),transparent 34%),#1b0d20}
+.screen{position:absolute;inset:0;display:none;place-items:center;padding:22px;opacity:0;transform:scale(.98);transition:.55s cubic-bezier(.2,.8,.2,1)}
+.screen.active{display:grid;opacity:1;transform:none}
+.card{width:min(720px,94vw);max-height:88vh;overflow:auto;padding:clamp(26px,6vw,48px);border-radius:34px;text-align:center;background:rgba(255,250,252,.96);box-shadow:0 28px 80px rgba(0,0,0,.36);border:1px solid rgba(255,255,255,.8)}
+.eyebrow{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:#b07a90;font-weight:800}
+h1,h2{margin:10px 0 14px;color:#c82e67;line-height:1.05}
+h1{font-size:clamp(3rem,11vw,6rem)}h2{font-size:clamp(2rem,7vw,4.1rem)}
+p{font-size:clamp(1rem,3.5vw,1.25rem);line-height:1.65;margin:12px auto;max-width:620px}
+.emoji{font-size:clamp(58px,16vw,100px);filter:drop-shadow(0 10px 12px rgba(205,45,100,.18));animation:breathe 2.5s ease-in-out infinite}
+.primary{border:0;border-radius:999px;padding:16px 26px;margin-top:18px;color:white;background:linear-gradient(135deg,#ff6a9d,#cc245f);font-weight:850;font-size:1.05rem;box-shadow:0 13px 30px rgba(204,36,95,.28);cursor:pointer;transition:.2s}
+.primary:active{transform:scale(.96)}
+#question .card{overflow:visible}
+#choices{margin-top:26px;min-height:118px;position:relative;display:flex;justify-content:center;align-items:center;gap:18px;flex-wrap:wrap}
+.choice{border:0;border-radius:999px;font-weight:850;cursor:pointer;transition:all .32s cubic-bezier(.2,.9,.2,1)}
+#yes{padding:17px 30px;color:#fff;background:linear-gradient(135deg,#ff6d9e,#c91859);box-shadow:0 15px 32px rgba(204,25,89,.28);font-size:1.1rem;z-index:2}
+#no{padding:15px 24px;color:#765f6c;background:#eee8ec;position:relative;z-index:1}
+#hint{height:22px;color:#b66c88;font-size:.9rem;margin-top:8px;opacity:0;transition:.3s}
+#scene,#final{
+ position:absolute;inset:0;display:none;opacity:0;transform:scale(.98);
+ transition:.55s cubic-bezier(.2,.8,.2,1)
+}
+#scene{background:
+ radial-gradient(circle at 50% 40%,#fffaf2 0%,#ffe4ef 38%,#5d244f 100%);cursor:pointer}
+#scene.active{display:block;opacity:1;transform:none;z-index:20}
+#final.active{display:grid;opacity:1;transform:none;z-index:30}
+.scene-top{position:absolute;top:5%;left:50%;transform:translateX(-50%);width:100%;text-align:center;z-index:5;padding:0 18px}
+.scene-top h2{font-size:clamp(2rem,8vw,4.6rem);margin:0;color:#bd2c66}
+.scene-top p{margin:7px 0;color:#744458}
+#bouquetWrap{position:absolute;left:50%;top:57%;width:min(92vw,650px);aspect-ratio:1/1.25;transform:translate(-50%,-50%)}
+#bouquet{width:100%;height:100%;overflow:visible}
+.sketch{fill:none;stroke:var(--line);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1800;stroke-dashoffset:1800}
+.draw .sketch{animation:trace 1.7s cubic-bezier(.3,.75,.2,1) forwards}
+.draw .d1{animation-delay:.00s}.draw .d2{animation-delay:.12s}.draw .d3{animation-delay:.24s}.draw .d4{animation-delay:.38s}.draw .d5{animation-delay:.52s}.draw .d6{animation-delay:.68s}.draw .d7{animation-delay:.84s}.draw .d8{animation-delay:1s}.draw .d9{animation-delay:1.15s}.draw .d10{animation-delay:1.3s}.draw .d11{animation-delay:1.45s}
+.paint{opacity:0;transform-box:fill-box;transform-origin:center;transition:opacity .55s ease,transform .65s cubic-bezier(.18,1.45,.35,1)}
+.colour .paint{opacity:1;transform:scale(1)}
+.sunPetal{fill:#ffc92c}.sunCore{fill:#5b3117}.sunDot{fill:#8c5526}.roseA{fill:#d92851}.roseB{fill:#ff6078}.roseC{fill:#9e173d}.daisy{fill:#fffdf8}.daisyCore{fill:#f6b932}.stem{stroke:#4f8e59;fill:none;stroke-width:8;stroke-linecap:round}.leaf{fill:#6dac64}.wrap{fill:#efabc0}.wrapShade{fill:#d986a4}.ribbon{fill:#d72964}.ribbon2{fill:#f24e84}
+#tap{position:absolute;bottom:5%;left:50%;transform:translateX(-50%);font-weight:900;color:#b62963;font-size:clamp(1rem,3.8vw,1.35rem);white-space:nowrap;opacity:0;transition:.5s;z-index:6}
+#tap.show{opacity:1;animation:tapPulse 1.25s infinite}
+#particles{position:absolute;inset:0;pointer-events:none;z-index:8}
+.spark{position:absolute;font-size:24px;opacity:0;animation:spark 1.9s ease-out forwards}
+#final{background:
+ radial-gradient(circle at 50% 15%,rgba(255,204,222,.45),transparent 28%),
+ radial-gradient(circle at 10% 85%,rgba(255,207,79,.12),transparent 26%),
+ linear-gradient(145deg,#321229,#170c1e)}
+.finalCard{width:min(760px,94vw);padding:clamp(28px,7vw,58px);border-radius:36px;text-align:center;background:rgba(255,250,252,.97);box-shadow:0 28px 90px rgba(0,0,0,.4)}
+.signature{font-size:1.1rem;font-weight:850;color:#be2b64;margin-top:22px}
+@keyframes breathe{50%{transform:translateY(-6px) scale(1.04)}}@keyframes trace{to{stroke-dashoffset:0}}@keyframes tapPulse{50%{transform:translateX(-50%) scale(1.06)}}@keyframes spark{0%{opacity:0;transform:translate(0,0) scale(.2)}20%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.45) rotate(220deg)}}
+@media(max-height:650px){.card{max-height:94vh;padding:20px}.emoji{font-size:48px}p{margin:7px auto}.primary{margin-top:8px}}
+
+
+
+/* Finished bouquet: remove only the dark flower construction outlines. */
+#bouquet.colour .flower-sketch{
+  opacity:0 !important;
+  stroke:transparent !important;
+  stroke-width:0 !important;
+  transition:opacity .4s ease;
+}
+
+</style>
+</head>
+<body>
+<div id="app">
+
+<section class="screen active">
+ <div class="card"><div class="eyebrow">A small message from Bobo</div><div class="emoji">🥺</div><h1>Cham Cham...</h1>
+ <p>I know we had a small fight.</p><p>And I know a normal person would probably just say, <b>“I'm sorry.”</b></p>
+ <p>Unfortunately, you're dating someone from the unnecessary-drama department. 😭❤️</p>
+ <button class="primary next">So... hear me out 👀</button></div>
+</section>
+
+<section class="screen">
+ <div class="card"><div class="emoji">💔</div><h2>I'm genuinely sorry.</h2>
+ <p>Not because I want the fight to disappear quickly.</p>
+ <p>Because I hate the idea that something I did or said made <b>you</b> upset.</p>
+ <p>I'm not here to keep score about who was right. I just want to own my part and tell you that you matter more to me than a stupid little argument.</p>
+ <button class="primary next">Okay... keep going 🥺</button></div>
+</section>
+
+<section class="screen">
+ <div class="card"><div class="emoji">❤️</div><h2>Because here's the thing...</h2>
+ <p>I like you in all your forms.</p>
+ <p>Happy Cham Cham. Sleepy Cham Cham. Annoyed Cham Cham. Dramatic Cham Cham. Even the <b>“I'm not talking to you”</b> Cham Cham. 😭</p>
+ <p>And when we fight, I don't suddenly stop choosing you.</p>
+ <p><b>I still do. Every time. ❤️</b></p>
+ <button class="primary next">One final question...</button></div>
+</section>
+
+<section id="question" class="screen">
+ <div class="card"><div class="emoji">🥹</div><h2>So Cham Cham...</h2>
+ <p>Will you forgive Bobo?</p>
+ <div id="choices"><button id="yes" class="choice">Yes, I forgive Bobo 💕</button><button id="no" class="choice">No 😤</button></div>
+ <div id="hint"></div></div>
+</section>
+
+<section id="scene">
+ <div class="scene-top"><h2 id="sceneTitle">Wait... one more thing 🥺❤️</h2><p id="sceneSub">I made something for you.</p></div>
+ <div id="bouquetWrap">
+ <svg id="bouquet" viewBox="0 0 600 760" aria-label="Animated bouquet">
+  <!-- stems first -->
+  <path class="sketch d1 stem" d="M300 655 C285 520 300 390 300 185"/>
+  <path class="sketch d2 stem" d="M250 665 C235 530 160 390 125 240"/>
+  <path class="sketch d3 stem" d="M350 665 C370 525 455 400 485 255"/>
+  <path class="sketch d4 stem" d="M210 665 C205 535 250 455 220 340"/>
+  <path class="sketch d5 stem" d="M390 665 C390 540 350 455 375 345"/>
+
+  <!-- leaves -->
+  <path class="sketch d4 leaf" d="M236 480 C162 418 143 507 219 535 C252 524 259 502 236 480Z"/>
+  <path class="sketch d5 leaf" d="M360 490 C447 423 458 517 377 542 C347 529 341 511 360 490Z"/>
+  <path class="sketch d6 leaf" d="M266 548 C205 519 199 592 261 614 C289 601 291 572 266 548Z"/>
+  <path class="sketch d6 leaf" d="M334 548 C395 518 404 591 341 614 C313 601 309 572 334 548Z"/>
+
+  <!-- sunflower left outline -->
+  <g transform="translate(125 210)">
+   <circle class="sketch d2 flower-sketch" r="72"/><g class="paint">
+   <g class="sunPetal">
+    <ellipse cx="0" cy="-48" rx="14" ry="34"/><ellipse cx="0" cy="-48" rx="14" ry="34" transform="rotate(30)"/><ellipse cx="0" cy="-48" rx="14" ry="34" transform="rotate(60)"/><ellipse cx="0" cy="-48" rx="14" ry="34" transform="rotate(90)"/><ellipse cx="0" cy="-48" rx="14" ry="34" transform="rotate(120)"/><ellipse cx="0" cy="-48" rx="14" ry="34" transform="rotate(150)"/><ellipse cx="0" cy="-48" rx="14" ry="34" transform="rotate(180)"/><ellipse cx="0" cy="-48" rx="14" ry="34" transform="rotate(210)"/><ellipse cx="0" cy="-48" rx="14" ry="34" transform="rotate(240)"/><ellipse cx="0" cy="-48" rx="14" ry="34" transform="rotate(270)"/><ellipse cx="0" cy="-48" rx="14" ry="34" transform="rotate(300)"/><ellipse cx="0" cy="-48" rx="14" ry="34" transform="rotate(330)"/>
+   </g><circle class="sunCore" r="31"/><g class="sunDot"><circle cx="-10" cy="-8" r="4"/><circle cx="8" cy="-5" r="4"/><circle cx="0" cy="11" r="4"/><circle cx="14" cy="14" r="3"/></g></g>
+  </g>
+
+  <!-- sunflower right -->
+  <g transform="translate(485 220) scale(1.08)">
+   <circle class="sketch d3 flower-sketch" r="72"/><g class="paint">
+   <g class="sunPetal">
+    <ellipse cx="0" cy="-48" rx="14" ry="34"/><ellipse cx="0" cy="-48" rx="14" ry="34" transform="rotate(30)"/><ellipse cx="0" cy="-48" rx="14" ry="34" transform="rotate(60)"/><ellipse cx="0" cy="-48" rx="14" ry="34" transform="rotate(90)"/><ellipse cx="0" cy="-48" rx="14" ry="34" transform="rotate(120)"/><ellipse cx="0" cy="-48" rx="14" ry="34" transform="rotate(150)"/><ellipse cx="0" cy="-48" rx="14" ry="34" transform="rotate(180)"/><ellipse cx="0" cy="-48" rx="14" ry="34" transform="rotate(210)"/><ellipse cx="0" cy="-48" rx="14" ry="34" transform="rotate(240)"/><ellipse cx="0" cy="-48" rx="14" ry="34" transform="rotate(270)"/><ellipse cx="0" cy="-48" rx="14" ry="34" transform="rotate(300)"/><ellipse cx="0" cy="-48" rx="14" ry="34" transform="rotate(330)"/>
+   </g><circle class="sunCore" r="31"/><g class="sunDot"><circle cx="-10" cy="-8" r="4"/><circle cx="8" cy="-5" r="4"/><circle cx="0" cy="11" r="4"/></g></g>
+  </g>
+
+  <!-- main rose -->
+  <g transform="translate(300 205)">
+   <circle class="sketch d4 flower-sketch" r="78"/><path class="sketch d5 flower-sketch" d="M0-64 C-84-58-84 24-42 69 C-16 98 16 98 42 69 C84 24 84-58 0-64Z"/>
+   <path class="sketch d6 flower-sketch" d="M0-44 C-56-40-62 13-27 50 C-9 69 9 69 27 50 C62 13 56-40 0-44Z"/>
+   <path class="sketch d7 flower-sketch" d="M-27 1 Q0-52 27 1 Q0 53-27 1Z"/>
+   <g class="paint"><path class="roseA" d="M0-64 C-84-58-84 24-42 69 C-16 98 16 98 42 69 C84 24 84-58 0-64Z"/><path class="roseB" d="M0-44 C-56-40-62 13-27 50 C-9 69 9 69 27 50 C62 13 56-40 0-44Z"/><path class="roseC" d="M-27 1 Q0-52 27 1 Q0 53-27 1Z"/></g>
+  </g>
+
+  <!-- lower roses -->
+  <g transform="translate(240 360) scale(.82)">
+   <circle class="sketch d7 flower-sketch" r="72"/><path class="sketch d8 flower-sketch" d="M0-60 C-76-54-76 21-37 64 C-13 89 13 89 37 64 C76 21 76-54 0-60Z"/><path class="sketch d9 flower-sketch" d="M-23 0 Q0-47 23 0 Q0 46-23 0Z"/>
+   <g class="paint"><path class="roseA" d="M0-60 C-76-54-76 21-37 64 C-13 89 13 89 37 64 C76 21 76-54 0-60Z"/><path class="roseB" d="M0-38 C-48-34-52 9-21 42 C-7 57 7 57 21 42 C52 9 48-34 0-38Z"/><path class="roseC" d="M-23 0 Q0-47 23 0 Q0 46-23 0Z"/></g>
+  </g>
+  <g transform="translate(375 365) scale(.78)">
+   <circle class="sketch d8 flower-sketch" r="72"/><path class="sketch d9 flower-sketch" d="M0-60 C-76-54-76 21-37 64 C-13 89 13 89 37 64 C76 21 76-54 0-60Z"/><path class="sketch d10 flower-sketch" d="M-23 0 Q0-47 23 0 Q0 46-23 0Z"/>
+   <g class="paint"><path class="roseA" d="M0-60 C-76-54-76 21-37 64 C-13 89 13 89 37 64 C76 21 76-54 0-60Z"/><path class="roseB" d="M0-38 C-48-34-52 9-21 42 C-7 57 7 57 21 42 C52 9 48-34 0-38Z"/><path class="roseC" d="M-23 0 Q0-47 23 0 Q0 46-23 0Z"/></g>
+  </g>
+
+  <!-- daisies -->
+  <g transform="translate(75 390)"><circle class="sketch d8 flower-sketch" r="54"/><g class="paint daisy">
+   <ellipse cx="0" cy="-34" rx="9" ry="27"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(45)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(90)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(135)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(180)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(225)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(270)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(315)"/><circle class="daisyCore" r="16"/></g></g>
+  <g transform="translate(525 400)"><circle class="sketch d9 flower-sketch" r="54"/><g class="paint daisy">
+   <ellipse cx="0" cy="-34" rx="9" ry="27"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(45)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(90)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(135)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(180)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(225)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(270)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(315)"/><circle class="daisyCore" r="16"/></g></g>
+  <g transform="translate(165 430) scale(.82)"><circle class="sketch d9 flower-sketch" r="54"/><g class="paint daisy">
+   <ellipse cx="0" cy="-34" rx="9" ry="27"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(45)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(90)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(135)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(180)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(225)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(270)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(315)"/><circle class="daisyCore" r="16"/></g></g>
+  <g transform="translate(455 445) scale(.75)"><circle class="sketch d10 flower-sketch" r="54"/><g class="paint daisy">
+   <ellipse cx="0" cy="-34" rx="9" ry="27"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(45)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(90)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(135)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(180)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(225)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(270)"/><ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(315)"/><circle class="daisyCore" r="16"/></g></g>
+
+   <!-- EXTRA OVERLAPPING ROSES -->
+
+<!-- Rose left-middle -->
+<g transform="translate(175 305) scale(.58)">
+  <circle class="sketch d7 flower-sketch" r="72"/>
+  <path class="sketch d8 flower-sketch"
+    d="M0-60 C-76-54-76 21-37 64 C-13 89 13 89 37 64 C76 21 76-54 0-60Z"/>
+  <path class="sketch d9 flower-sketch"
+    d="M0-38 C-48-34-52 9-21 42 C-7 57 7 57 21 42 C52 9 48-34 0-38Z"/>
+  <path class="sketch d10 flower-sketch"
+    d="M-23 0 Q0-47 23 0 Q0 46-23 0Z"/>
+
+  <g class="paint">
+    <path class="roseA"
+      d="M0-60 C-76-54-76 21-37 64 C-13 89 13 89 37 64 C76 21 76-54 0-60Z"/>
+    <path class="roseB"
+      d="M0-38 C-48-34-52 9-21 42 C-7 57 7 57 21 42 C52 9 48-34 0-38Z"/>
+    <path class="roseC"
+      d="M-23 0 Q0-47 23 0 Q0 46-23 0Z"/>
+  </g>
+</g>
+
+<!-- Rose right-middle -->
+<g transform="translate(430 315) scale(.62)">
+  <circle class="sketch d8 flower-sketch" r="72"/>
+  <path class="sketch d9 flower-sketch"
+    d="M0-60 C-76-54-76 21-37 64 C-13 89 13 89 37 64 C76 21 76-54 0-60Z"/>
+  <path class="sketch d10 flower-sketch"
+    d="M0-38 C-48-34-52 9-21 42 C-7 57 7 57 21 42 C52 9 48-34 0-38Z"/>
+  <path class="sketch d11 flower-sketch"
+    d="M-23 0 Q0-47 23 0 Q0 46-23 0Z"/>
+
+  <g class="paint">
+    <path class="roseA"
+      d="M0-60 C-76-54-76 21-37 64 C-13 89 13 89 37 64 C76 21 76-54 0-60Z"/>
+    <path class="roseB"
+      d="M0-38 C-48-34-52 9-21 42 C-7 57 7 57 21 42 C52 9 48-34 0-38Z"/>
+    <path class="roseC"
+      d="M-23 0 Q0-47 23 0 Q0 46-23 0Z"/>
+  </g>
+</g>
+
+<!-- Small centre-bottom rose, overlapping the two lower roses -->
+<g transform="translate(307 435) scale(.58)">
+  <circle class="sketch d9 flower-sketch" r="72"/>
+  <path class="sketch d10 flower-sketch"
+    d="M0-60 C-76-54-76 21-37 64 C-13 89 13 89 37 64 C76 21 76-54 0-60Z"/>
+  <path class="sketch d11 flower-sketch"
+    d="M0-38 C-48-34-52 9-21 42 C-7 57 7 57 21 42 C52 9 48-34 0-38Z"/>
+  <path class="sketch d10 flower-sketch"
+    d="M-23 0 Q0-47 23 0 Q0 46-23 0Z"/>
+
+  <g class="paint">
+    <path class="roseA"
+      d="M0-60 C-76-54-76 21-37 64 C-13 89 13 89 37 64 C76 21 76-54 0-60Z"/>
+    <path class="roseB"
+      d="M0-38 C-48-34-52 9-21 42 C-7 57 7 57 21 42 C52 9 48-34 0-38Z"/>
+    <path class="roseC"
+      d="M-23 0 Q0-47 23 0 Q0 46-23 0Z"/>
+  </g>
+</g>
+
+
+<!-- EXTRA OVERLAPPING DAISIES -->
+
+<!-- Daisy upper-left gap -->
+<g transform="translate(80 310) scale(.65)">
+  <circle class="sketch d7 flower-sketch" r="54"/>
+  <g class="paint daisy">
+    <ellipse cx="0" cy="-34" rx="9" ry="27"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(45)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(90)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(135)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(180)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(225)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(270)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(315)"/>
+    <circle class="daisyCore" r="16"/>
+  </g>
+</g>
+
+<!-- Daisy upper-right gap -->
+<g transform="translate(525 320) scale(.68)">
+  <circle class="sketch d8 flower-sketch" r="54"/>
+  <g class="paint daisy">
+    <ellipse cx="0" cy="-34" rx="9" ry="27"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(45)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(90)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(135)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(180)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(225)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(270)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(315)"/>
+    <circle class="daisyCore" r="16"/>
+  </g>
+</g>
+
+<!-- Daisy overlapping lower-left -->
+<g transform="translate(205 455) scale(.70)">
+  <circle class="sketch d9 flower-sketch" r="54"/>
+  <g class="paint daisy">
+    <ellipse cx="0" cy="-34" rx="9" ry="27"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(45)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(90)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(135)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(180)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(225)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(270)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(315)"/>
+    <circle class="daisyCore" r="16"/>
+  </g>
+</g>
+
+<!-- Daisy overlapping lower-right -->
+<g transform="translate(405 455) scale(.68)">
+  <circle class="sketch d10 flower-sketch" r="54"/>
+  <g class="paint daisy">
+    <ellipse cx="0" cy="-34" rx="9" ry="27"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(45)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(90)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(135)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(180)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(225)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(270)"/>
+    <ellipse cx="0" cy="-34" rx="9" ry="27" transform="rotate(315)"/>
+    <circle class="daisyCore" r="16"/>
+  </g>
+</g>
+   
+  <!-- wrapper -->
+  <path class="sketch d10" d="M95 470 L300 715 L505 470 Z"/><path class="sketch d11" d="M95 470 Q300 525 505 470"/>
+  <path class="paint wrap" d="M100 478 Q300 525 500 478 L300 705 Z"/><path class="paint wrapShade" d="M300 525 L500 478 L300 705 Z"/>
+  <path class="sketch d11" d="M230 630 Q300 690 370 630 Q300 755 230 630Z"/><path class="paint ribbon" d="M230 630 Q300 690 370 630 Q300 755 230 630Z"/><path class="paint ribbon2" d="M300 674 Q258 708 232 705 Q248 660 300 666 Q352 660 368 705 Q342 708 300 674Z"/>
+ </svg>
+ </div>
+ <div id="tap">Tap anywhere for your flowers 🌻🌹🌼❤️</div><div id="particles"></div>
+</section>
+
+<section id="final">
+ <div class="finalCard"><div class="emoji">💐</div><h1>For Cham Cham.</h1>
+ <p>I can't hand you these through the screen, so I made them bloom for you instead.</p>
+ <p>I'm sorry for the fight. I'm sorry for my part in it.</p>
+ <p>But most importantly, I hope you know this:</p>
+ <p style="font-size:1.55rem;font-weight:900;color:#c82e67">No small fight changes how much I choose you. ❤️</p>
+ <p class="signature">Love, Bobo 🥺❤️</p></div>
+</section>
+</div>
+
+<script>
+const screens=[...document.querySelectorAll('.screen')];let i=0,noCount=0,sceneReady=false,painted=false;
+const next=()=>{screens[i].classList.remove('active');i++;screens[i].classList.add('active')};
+document.querySelectorAll('.next').forEach(b=>b.onclick=next);
+const no=document.querySelector('#no'),yes=document.querySelector('#yes'),hint=document.querySelector('#hint');
+const noLines=['Are you sure? 🥺','Cham Chaaam 😭','Bobo is sorryyy 🥹','Please forgive me? 🥺','Still no? 😭','The Yes button is looking nice 👀','Okay... now you HAVE to press Yes 😭❤️'];
+no.onclick=()=>{
+ no.textContent=noLines[Math.min(noCount,noLines.length-1)];
+ noCount++;
+ const yesScale=1+Math.min(noCount,7)*.12;
+ yes.style.transform=`scale(${yesScale})`;
+ hint.style.opacity=1;
+ hint.textContent='Bobo would strongly recommend the other button. 🥺';
+
+ // Once YES gets large enough, place NO directly underneath it.
+ // YES has the higher z-index, so it physically covers NO.
+ if(yesScale>=1.36){
+   no.style.position='absolute';
+   no.style.left='50%';
+   no.style.top='50%';
+   no.style.transform='translate(-50%,-50%)';
+   no.style.zIndex='1';
+   no.style.pointerEvents='none';
+   yes.style.zIndex='3';
+ }
+
+ if(noCount>5) no.style.opacity=.58;
+};
+yes.onclick=()=>{
+ screens[i].classList.remove('active');
+ const heart=document.createElement('div');heart.style.cssText='position:fixed;inset:0;z-index:20;display:grid;place-items:center;font-size:min(55vw,420px);background:radial-gradient(circle,#fff4f8 0%,#f5b7d1 45%,#3a1434 100%);animation:heartIn 1.9s forwards;';heart.textContent='❤️';
+ const style=document.createElement('style');style.textContent='@keyframes heartIn{0%{opacity:0;transform:scale(.2)}30%{opacity:1;transform:scale(1.15)}55%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(2.4)}}';document.head.append(style);document.body.append(heart);
+ setTimeout(()=>{heart.remove();style.remove();const scene=document.querySelector('#scene');scene.classList.add('active');document.querySelector('#bouquet').classList.add('draw');
+ setTimeout(()=>{sceneReady=true;document.querySelector('#tap').classList.add('show');document.querySelector('#sceneTitle').textContent='I drew these for you, Cham Cham... 🥺❤️';document.querySelector('#sceneSub').textContent='But they need one little thing from you.'},3400)},1850);
+};
+document.querySelector('#scene').onclick=()=>{if(!sceneReady||painted)return;painted=true;document.querySelector('#tap').classList.remove('show');document.querySelector('#bouquet').classList.add('colour');burst();
+ setTimeout(()=>{document.querySelector('#scene').classList.remove('active');document.querySelector('#final').classList.add('active')},2500)};
+function burst(){const p=document.querySelector('#particles');const icons=['✨','💖','🌸','💫','❤️'];for(let n=0;n<38;n++){let s=document.createElement('span');s.className='spark';s.textContent=icons[n%icons.length];s.style.left=(35+Math.random()*30)+'%';s.style.top=(38+Math.random()*28)+'%';s.style.setProperty('--x',(-220+Math.random()*440)+'px');s.style.setProperty('--y',(-220+Math.random()*440)+'px');s.style.animationDelay=(Math.random()*.35)+'s';p.append(s);setTimeout(()=>s.remove(),2200)}}
+</script>
+</body>
+</html>
